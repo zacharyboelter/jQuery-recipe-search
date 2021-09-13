@@ -60,16 +60,92 @@ const apiData = [
 ]
 
 // I should be able to click button
-
 const $getRecipeBtn = $('#recipe-btn');
+const $mainContent = $('main');
 
 //get API data =============
 const getRecipe = () => {
 	// this is where we could get the api data using AJAX
 	const randomIndex = Math.floor(Math.random() * apiData.length);
 	const recipe = apiData[randomIndex];
-	console.log(recipe);
+	displayRecipe(recipe);
+};
+
+// add parameter to be passed ^^ in where we call displayRecipe function.
+//random recipe is just a variable, placeholder
+//if stuck, go to 940 (chicago time) of class recording for easy expalition of all this shit
+const displayRecipe = (recipe) => {
+	// console.log(recipe)
+
+	// remove child elements (nodes) from the mainContent
+	$mainContent.empty()
+
+	// display recipe image
+	const $img = $('<img>')
+	$img.attr('src', recipe.image)
+	$img.attr('alt', recipe.title)
+	$mainContent.append($img)
+
+	// create div to hold recipe info
+	const $recipeInfo = $('<div>')
+	$recipeInfo.addClass('recipeInfo')
+	$mainContent.append($recipeInfo)
+
+	// display recipe title
+	const $recipeTitle = $('<h2>')
+	$recipeTitle.text(recipe.title)
+	$recipeInfo.append($recipeTitle)
+
+	// display heading for ingredients list
+	const $ingredientsHeading = $('<h3>')
+	$ingredientsHeading.text('Ingredients')
+	$recipeInfo.append($ingredientsHeading)
+
+	//make ul for ingredients list
+	const $ingredientsList = $('<ul>')
+	$recipeInfo.append($ingredientsList)
+
+	//display each ingredient as a list item
+	recipe.ingredients.forEach((ingredient) => {
+		// console.log(ingredient)
+
+		const $li = $('<li>')
+		$li.text(ingredient)
+		$ingredientsList.append($li)
+	})
+
+	const $instructionsHeading = $('<h3>')
+	$instructionsHeading.text('Instructions')
+	$recipeInfo.append($instructionsHeading)
+
+
+	const $instructionsList = $('<ul>')
+	$recipeInfo.append($instructionsList)
+
+	recipe.instructions.forEach((instruction) => {
+
+		const $li = $('<li>')
+		$li.text(instruction)
+		$instructionsList.append($li)
+
+	})
+
+
+
+
+
+
 }
+
+
+
+// display list of ingredients
+// display each ingredient as a list item
+// display heading for instructions
+// display list of instructions
+// display each instruction as a list item
+
+
+
 // event listener ===========
 $getRecipeBtn.on('click', getRecipe);
-
