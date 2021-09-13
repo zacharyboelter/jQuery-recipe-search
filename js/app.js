@@ -1,3 +1,4 @@
+
 // dummy API data =====
 const apiData = [
 	{
@@ -57,3 +58,18 @@ const apiData = [
 		],
 	},
 ]
+
+// I should be able to click button
+
+const $getRecipeBtn = $('#recipe-btn');
+
+//get API data =============
+const getRecipe = () => {
+	// this is where we could get the api data using AJAX
+	const randomIndex = Math.floor(Math.random() * apiData.length);
+	const recipe = apiData[randomIndex];
+	console.log(recipe);
+}
+// event listener ===========
+$getRecipeBtn.on('click', getRecipe);
+
